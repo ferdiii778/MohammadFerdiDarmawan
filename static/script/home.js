@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // Mobile Navigation Toggle
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav-links');
@@ -76,7 +75,7 @@ window.addEventListener('scroll', function() {
         }
     });
 });
-=======
+
 // ========================================
 // Custom Cursor
 // ========================================
@@ -464,4 +463,3 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.opacity = '1';
     }, 100);
 });
->>>>>>> 88c212a (update portfolio)
