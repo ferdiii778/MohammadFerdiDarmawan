@@ -1,4 +1,69 @@
 // ========================================
+// Custom Cursor Movement
+// ========================================
+const cursor = document.querySelector('.cursor');
+const cursorFollower = document.querySelector('.cursor-follower');
+
+if (cursor && cursorFollower) {
+    let mouseX = 0;
+    let mouseY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
+    let followerX = 0;
+    let followerY = 0;
+
+    // Update mouse position
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    // Smooth cursor animation
+    function animateCursor() {
+        // Cursor position (fast follow)
+        cursorX += (mouseX - cursorX) * 0.5;
+        cursorY += (mouseY - cursorY) * 0.5;
+        cursor.style.transform = `translate3d(${cursorX - 10}px, ${cursorY - 10}px, 0)`;
+
+        // Follower position (slow follow)
+        followerX += (mouseX - followerX) * 0.15;
+        followerY += (mouseY - followerY) * 0.15;
+        cursorFollower.style.transform = `translate3d(${followerX - 20}px, ${followerY - 20}px, 0)`;
+
+        requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Cursor effects on hover
+    const hoverElements = document.querySelectorAll('a, button, .portfolio-card, .certificate-card, .skill-item');
+    
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.transform += ' scale(1.5)';
+            cursorFollower.style.transform += ' scale(1.5)';
+            cursor.style.background = 'var(--color-secondary)';
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            cursor.style.transform = cursor.style.transform.replace(' scale(1.5)', '');
+            cursorFollower.style.transform = cursorFollower.style.transform.replace(' scale(1.5)', '');
+            cursor.style.background = 'var(--color-primary)';
+        });
+    });
+
+    // Hide cursor when leaving window
+    document.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+        cursorFollower.style.opacity = '0';
+    });
+
+    document.addEventListener('mouseenter', () => {
+        cursor.style.opacity = '1';
+        cursorFollower.style.opacity = '1';
+    });
+}
+
+// ========================================
 // Mobile Navigation Toggle
 // ========================================
 const burger = document.querySelector('.burger');
